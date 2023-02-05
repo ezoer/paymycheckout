@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Author: Emmanuel Paul Mnzava
  * Twitter: @epmnzava
@@ -8,26 +7,20 @@
  * 
  */
 
-
 class Tigosecure
 {
-
-
-    private $client_id;
-    private $client_secret;
-    private $account_id;
-    private $account_number;
-    private $account_pin;
-    private $baseurl;
-    private $redirect_url;
-    private $callback_url;
-    private $lang;
-    private $currency;
-
-
+    private $client_id,
+        $client_secret,
+        $account_id,
+        $account_number,
+        $account_pin,
+        $baseurl,
+        $redirect_url,
+        $callback_url,
+        $lang,
+        $currency;
 
     //private $issuedToken;
-
     public  $base_url,
         $issuedToken,
         $customer_firstname,
@@ -73,7 +66,6 @@ class Tigosecure
      */
     public function access_token()
     {
-
         $api = new TigoUtil();
         $tokenArray = json_decode($api->get_access_token($this->baseurl, $this->client_id, $this->client_secret));
         $this->issuedToken = $tokenArray->accessToken;
@@ -81,6 +73,7 @@ class Tigosecure
         // $tokenArray = json_decode($api->get_access_token(config('tigosecure.api_url')));
         //$this->issuedToken = $tokenArray->accessToken;
     }
+
 
     /**
      * make_payment
@@ -94,9 +87,7 @@ class Tigosecure
      */
     public function make_payment($customer_firstname, $customer_lastname, $customer_email, $amount, $reference_id)
     {
-
         $this->write_log("redirect ".$this->redirect_url);
-
         $this->write_log("callback ".$this->callback_url);
 
         $this->access_token();
@@ -108,6 +99,7 @@ class Tigosecure
     }
 
 
+    //
     private function write_log($log)
     {
         if (true === WP_DEBUG) {
